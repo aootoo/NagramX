@@ -31117,7 +31117,8 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                             final TranslateController translateController = getMessagesController().getTranslateController();
                             boolean showTranslate = NekoConfig.showTranslate.Bool();
                             boolean showTranslateLLM = NaConfig.INSTANCE.getShowTranslateMessageLLM().Bool();
-                            if ((showTranslate || showTranslateLLM) && !translateController.isTranslatingDialog(selectedObject.getDialogId())) {
+                            boolean isTranslatingDialog = translateController.isTranslatingDialog(selectedObject.getDialogId());
+                            if ((showTranslate || showTranslateLLM) && (selectedObject.isOutOwner() || !isTranslatingDialog)) {
                                 if (messageObject != null || docsWithMessages) {
                                     boolean td;
                                     if (messageObject != null) {
